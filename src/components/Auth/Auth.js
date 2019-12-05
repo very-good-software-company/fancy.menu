@@ -57,6 +57,11 @@ const Auth = () => {
           </form>
         </div>
       </div>
+
+      {/*
+      TODO
+      - Add restaurant name, address, phone, etc to signup form
+      */}
     </>
   );
 }
