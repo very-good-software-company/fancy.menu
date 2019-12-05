@@ -4,7 +4,8 @@ import Auth from './components/Auth';
 import Navbar from './components/Navbar';
 import { Auth as AuthState } from './state/auth';
 
-const Home = lazy(() => import('./views/Home'));
+const BusinessDashboard = lazy(() => import('./views/BusinessDashboard'));
+const NotFound = lazy(() => import('./views/NotFound'));
 
 const Routes = () => {
   const { user, isAuthenticating } = AuthState.useContainer();
@@ -18,7 +19,8 @@ const Routes = () => {
           <Suspense fallback={<div>Loading...</div>}>
             <Navbar />
             <Switch>
-              <Route path="/" exact component={Home} />
+              <Route path="/" exact component={BusinessDashboard} />
+              <Route component={NotFound} />
             </Switch>
           </Suspense>
         </Router>
