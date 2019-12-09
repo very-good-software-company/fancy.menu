@@ -4,10 +4,29 @@ import { Auth } from '../../state/auth';
 import { Menus } from '../../state/menus';
 import { db } from '../../firebase';
 
+
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+
+import Link from '@material-ui/core/Link';
+
+import BusinessIcon from '@material-ui/icons/Business';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Slide from '@material-ui/core/Slide';
+
+import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
+
 const BusinessDashboard = ({ history }) => {
   const { user } = Auth.useContainer();
   const { business, businessLoading, initBusinessListener } = Business.useContainer();
   const { menus, menusLoading, initMenusListener } = Menus.useContainer();
+  
 
   useEffect(() => {
     initBusinessListener();
@@ -47,43 +66,134 @@ const BusinessDashboard = ({ history }) => {
     }
   }
 
+
+  function Copyright() {
+    return (
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href="https://material-ui.com/">
+          Your Website
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
+  
+  const useStyles = makeStyles(theme => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+
+  const classes = useStyles();
+
   return (
     <>
+      <Container component="main" maxWidth="xs">
       { businessLoading && (
-        <div>Business is Loading...</div>
+        <Slide direction="right" in={businessLoading }>
+          <div>Business is Loading...</div>
+        </Slide>
+        
       ) }
 
       { !businessLoading && business && (
         <>
-          <h1>{ business.name }</h1>
+        
+          
+          <Typography component="h1" variant="h3">
+            { business.name }
+          </Typography>
 
           { menusLoading && <div>Loading Menus...</div> }
 
           { !menusLoading && menus.length && (
             <>
-              { menus.map(menu => {
-                return (
-                  <Fragment key={menu.id}>
-                    <button onClick={() => deleteMenu(menu.id)}>Delete</button>
-                    <div>{ menu.title }</div>
-                  </Fragment>
-                );
-              }) }
+             
+
+                { menus.map(menu => {
+                    return (
+                     
+                        <Fragment key={menu.id}>
+                          
+                            <Typography component="h1" variant="h5">
+                              { menu.title }
+                            </Typography>
+                            
+                            <Button
+                              variant="contained"
+                              color="secondary"
+                              className={classes.button}
+                              endIcon={<DeleteIcon />}
+                              onClick={() => deleteMenu(menu.id)}
+                            >
+                              Delete
+                            </Button>
+                          
+                        </Fragment>
+                      
+                    );
+                  }) }
+              
+              
             </>
           ) }
 
           { !menusLoading && menus.length < 1 && (
             <>
-              <h2>Create a menu!</h2>
-              <form onSubmit={menuCreate}>
-                <div>
-                  <label>Menu Name</label>
+            <Slide direction="right" in={!menusLoading && menus.length < 1}>
+             <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                  <Avatar className={classes.avatar}>
+                    <MenuBookIcon />
+                  </Avatar>
+                  <Typography component="h1" variant="h5">
+                  Create a menu!
+                  </Typography>
+                  <form className={classes.form} onSubmit={menuCreate} noValidate>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="menuName"
+                      label="Menu Name"
+                      name="menuName"
+                      autoFocus
+                    />
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className={classes.submit}
+                      endIcon={<CreateIcon />}
+                    >
+                      Create Menu
+                    </Button>
+
+                    
+                  </form>
                 </div>
-                <div>
-                  <input type="text" name="menuName" placeholder="Enter a menu name" />
-                </div>
-                <button type="submit">Create Menu</button>
-              </form>
+        
+              </Container>
+              </Slide>
             </>
           ) }
         </>
@@ -91,20 +201,49 @@ const BusinessDashboard = ({ history }) => {
 
       { !businessLoading && !business && (
         <>
-          <h1>Create Your Restaurant</h1>
-          <form onSubmit={submitBusiness}>
-            <div>
-              <label>Business Name</label>
+
+          <Slide direction="right" in={!businessLoading && !business}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <BusinessIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Create Business
+              </Typography>
+              <form className={classes.form} onSubmit={submitBusiness} noValidate>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="businessName"
+                  label="Business Name"
+                  name="businessName"
+                  autoFocus
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Create Business / Website
+                </Button>
+              </form>
             </div>
-            <div>
-              <input type="text" name="businessName" placeholder="Enter a business name" />
-            </div>
-            <button type="submit">Create Business / Website</button>
-          </form>
+    
+          </Container>
+          </Slide>
         </>
       ) }
+      </Container>
     </>
   );
 }
 
 export default BusinessDashboard;
+
+
