@@ -73,6 +73,7 @@ const Auth = () => {
     <>
     
 
+      {/* TODO switch render logic from hide show to conditional  */}
       <div style={authContainerStyles}>
         <div style={{
           ...tabStyles,
