@@ -3,22 +3,17 @@ import { Business } from '../../state/business';
 import { Auth } from '../../state/auth';
 import { Menus } from '../../state/menus';
 import { db } from '../../firebase';
-
-
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-
 import Link from '@material-ui/core/Link';
-
 import BusinessIcon from '@material-ui/icons/Business';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Slide from '@material-ui/core/Slide';
-
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 
@@ -27,7 +22,6 @@ const BusinessDashboard = ({ history }) => {
   const { business, businessLoading, initBusinessListener } = Business.useContainer();
   const { menus, menusLoading, initMenusListener } = Menus.useContainer();
   
-
   useEffect(() => {
     initBusinessListener();
   }, []);
@@ -67,7 +61,6 @@ const BusinessDashboard = ({ history }) => {
   }
 
   const deleteBusiness = () => {
-    
     if(window.confirm("Are you sure you want to delete your business?")){
       db.collection('businesses')
       .doc(business.id)
@@ -75,7 +68,6 @@ const BusinessDashboard = ({ history }) => {
     }
 
   }
-
 
   function Copyright() {
     return (
@@ -119,13 +111,10 @@ const BusinessDashboard = ({ history }) => {
         <Slide direction="right" in={businessLoading }>
           <div>Business is Loading...</div>
         </Slide>
-        
       ) }
 
       { !businessLoading && business && (
         <>
-        
-          
           <Typography component="h1" variant="h3">
             { business.name }
           </Typography>
@@ -138,8 +127,6 @@ const BusinessDashboard = ({ history }) => {
           >
             Delete
           </Button>
-          
-
           { menusLoading && <div>Loading Menus...</div> }
 
           { !menusLoading && menus.length > 0 && (
@@ -219,7 +206,6 @@ const BusinessDashboard = ({ history }) => {
 
       { !businessLoading && !business && (
         <>
-
           <Slide direction="right" in={!businessLoading && !business}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
