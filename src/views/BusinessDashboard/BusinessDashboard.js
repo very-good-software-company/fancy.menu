@@ -66,6 +66,16 @@ const BusinessDashboard = ({ history }) => {
     }
   }
 
+  const deleteBusiness = () => {
+    
+    if(window.confirm("Are you sure you want to delete your business?")){
+      db.collection('businesses')
+      .doc(business.id)
+      .delete();
+    }
+
+  }
+
 
   function Copyright() {
     return (
@@ -119,17 +129,25 @@ const BusinessDashboard = ({ history }) => {
           <Typography component="h1" variant="h3">
             { business.name }
           </Typography>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.button}
+            endIcon={<DeleteIcon />}
+            onClick={deleteBusiness}
+          >
+            Delete
+          </Button>
+          
 
           { menusLoading && <div>Loading Menus...</div> }
 
-          { !menusLoading && menus.length && (
+          { !menusLoading && menus.length > 0 && (
             <>
-             
-
                 { menus.map(menu => {
                     return (
-                     
-                        <Fragment key={menu.id}>
+                        <Container component="main" maxWidth="xs" key={menu.id}>
+                        {/* <Fragment key={menu.id}> */}
                           
                             <Typography component="h1" variant="h5">
                               { menu.title }
@@ -145,14 +163,14 @@ const BusinessDashboard = ({ history }) => {
                               Delete
                             </Button>
                           
-                        </Fragment>
-                      
+                        {/* </Fragment> */}
+                      </Container>
                     );
                   }) }
-              
-              
             </>
           ) }
+
+
 
           { !menusLoading && menus.length < 1 && (
             <>
