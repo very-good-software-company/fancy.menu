@@ -36,6 +36,7 @@ function useBusiness(initialState = initial) {
             setBusinessLoading(false);
           } else {
             console.log('business not found');
+            setBusiness(null);
             setBusinessLoading(false);
           }
         },
