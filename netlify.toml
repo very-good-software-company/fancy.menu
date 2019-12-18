@@ -1,9 +1,9 @@
 [build]
   command = "gatsby build"
-  publish = "public"
+  publish = "testtemplate/public"
   base = "testtemplate"
 
 [context.branch-deploy]
   command = "gatsby build"
-  publish = "public"
+  publish = "testtemplate/public"
   base = "testtemplate"
