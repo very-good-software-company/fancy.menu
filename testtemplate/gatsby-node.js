@@ -1,14 +1,20 @@
-const admin = require('firebase-admin');
+const firebase = require('firebase/app');
+require('firebase/firestore');
 
-// Local only, get from project owner
-const serviceAccount = require('./firebase-admin.json');
+const firebaseConfig = {
+  apiKey: "AIzaSyBQO5dOL_wGG8TaXuLmfPJKtjwt9IMUk3Y",
+  authDomain: "fancymenu-f86d3.firebaseapp.com",
+  databaseURL: "https://fancymenu-f86d3.firebaseio.com",
+  projectId: "fancymenu-f86d3",
+  storageBucket: "fancymenu-f86d3.appspot.com",
+  messagingSenderId: "882163445390",
+  appId: "1:882163445390:web:ed7ce025467302425623df"
+};
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://fancymenu-f86d3.firebaseio.com',
-});
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-const db = admin.firestore();
+const db = firebase.firestore();
 
 exports.createPages = async ({ actions: { createPage } }) => {
   /* TODO menu ID */
@@ -20,8 +26,6 @@ exports.createPages = async ({ actions: { createPage } }) => {
   .get();
 
   const menu = menuSnap.exists ? menuSnap.data() : null;
-
-  console.log(menu);
 
   createPage({
     path: '/',
