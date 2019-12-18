@@ -18,7 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Slide from '@material-ui/core/Slide';
-
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 const authContainerStyles = {
   display: 'flex',
   flexDirection: 'row',
@@ -35,7 +35,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Fancy Menu
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -70,10 +70,14 @@ const Auth = () => {
   const classes = useStyles();
 
   return (
-    <>
-    
+    <div style={authContainerStyles}>
 
-      <div style={authContainerStyles}>
+
+    
+      {tab === 'login' && (
+
+
+
         <div style={{
           ...tabStyles,
           display: tab === 'login' ? 'flex' : 'none',
@@ -153,6 +157,12 @@ const Auth = () => {
 
         </div>
 
+
+
+      )}
+
+      {tab === 'signup' && (
+
         <div style={{
           ...tabStyles,
           display: tab === 'signup' ? 'flex' : 'none',
@@ -164,7 +174,7 @@ const Auth = () => {
             <CssBaseline />
             <div className={classes.paper}>
               <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
+                <PersonAddIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
                 Sign Up
@@ -230,13 +240,19 @@ const Auth = () => {
 
 
         </div>
-      </div>
 
-      {/*
-      TODO
-      - Add restaurant name, address, phone, etc to signup form
-      */}
-    </>
+
+
+
+
+      )}
+
+      
+      
+      {/* TODO
+      - Add restaurant name, address, phone, etc to signup form */}
+      
+    </div>
   );
 }
 
