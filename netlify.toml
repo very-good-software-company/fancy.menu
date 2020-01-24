@@ -1,7 +1,9 @@
 [build]
-  command = "npm run build"
-  publish = "build"
+    command = "gatsby build"
+    publish = "simplemenu/public"
+    base = "simplemenu"
 
-[context.branch-deploy]
-  command = "npm run build"
-  publish = "build"
+  [context.branch-deploy]
+    command = "gatsby build"
+    publish = "simplemenu/public"
+    base = "simplemenu"
