@@ -7,15 +7,19 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import BusinessIcon from '@material-ui/icons/Business';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
+
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Slide from '@material-ui/core/Slide';
 import DeleteIcon from '@material-ui/icons/Delete';
-import CreateIcon from '@material-ui/icons/Create';
+
+
+
+import CreateMenu from '../../components/CreateMenu';
+
+
 
 const BusinessDashboard = ({ history }) => {
   const { user } = Auth.useContainer();
@@ -39,6 +43,7 @@ const BusinessDashboard = ({ history }) => {
 
   const menuCreate = e => {
     e.preventDefault();
+    console.log('creating a menu');
 
     db.collection('businesses')
     .doc(business.id)
@@ -69,18 +74,6 @@ const BusinessDashboard = ({ history }) => {
 
   }
 
-  function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Your Website
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
   
   const useStyles = makeStyles(theme => ({
     paper: {
@@ -134,7 +127,7 @@ const BusinessDashboard = ({ history }) => {
                 { menus.map(menu => {
                     return (
                         <Container component="main" maxWidth="xs" key={menu.id}>
-                        {/* <Fragment key={menu.id}> */}
+                        
                           
                             <Typography component="h1" variant="h5">
                               { menu.title }
@@ -150,7 +143,7 @@ const BusinessDashboard = ({ history }) => {
                               Delete
                             </Button>
                           
-                        {/* </Fragment> */}
+                        
                       </Container>
                     );
                   }) }
@@ -161,43 +154,10 @@ const BusinessDashboard = ({ history }) => {
 
           { !menusLoading && menus.length < 1 && (
             <>
-            <Slide direction="right" in={!menusLoading && menus.length < 1}>
-             <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <div className={classes.paper}>
-                  <Avatar className={classes.avatar}>
-                    <MenuBookIcon />
-                  </Avatar>
-                  <Typography component="h1" variant="h5">
-                  Create a menu!
-                  </Typography>
-                  <form className={classes.form} onSubmit={menuCreate} noValidate>
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="menuName"
-                      label="Menu Name"
-                      name="menuName"
-                      autoFocus
-                    />
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      className={classes.submit}
-                      endIcon={<CreateIcon />}
-                    >
-                      Create Menu
-                    </Button>
-
-                    
-                  </form>
-                </div>
-        
-              </Container>
+              <Slide direction="right" in={!menusLoading && menus.length < 1}>
+                <Container component="main" maxWidth="xs">
+                  <CreateMenu menuCreate={menuCreate} />
+                </Container>
               </Slide>
             </>
           ) }

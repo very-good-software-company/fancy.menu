@@ -34,15 +34,11 @@ const Navbar = ({ history }) => {
 
       <AppBar position="static">
         <Toolbar>
-          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton> */}
             
             <Typography variant="h6" className={classes.title} onClick={home}>
                   Fancy Menu
             </Typography>
             
-          {/* <Button color="inherit" onClick={logout}>Logout</Button> */}
           <Button
             color="inherit"
             className={classes.button}
