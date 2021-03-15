@@ -1,7 +1,5 @@
 [build]
-  command = "CI= npm run build"
-  publish = "build"
+    publish = "testtemplate"
 
-[context.branch-deploy]
-  command = "CI= npm run build"
-  publish = "build"
+  [context.branch-deploy]
+    publish = "testtemplate"
