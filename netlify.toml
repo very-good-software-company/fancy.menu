@@ -3,5 +3,5 @@
   publish = "build"
 
 [context.branch-deploy]
-  command = "npm audit fix & run build"
+  command = "npm run build"
   publish = "build"
