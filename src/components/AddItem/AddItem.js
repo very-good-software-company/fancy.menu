@@ -20,7 +20,6 @@ const AddItem = ({ itemCreate , menuSections}) => {
 
     setValue(event.target.value);
 
-    console.log('event: ', event.target.value, value)
   };
 
   const useStyles = makeStyles(theme => ({
@@ -61,7 +60,6 @@ const AddItem = ({ itemCreate , menuSections}) => {
     };
 
     itemCreate(item, value);
-
     
     e.target.itemDescription.value = '';
     e.target.itemPrice.value = '';
@@ -71,7 +69,7 @@ const AddItem = ({ itemCreate , menuSections}) => {
 
   const radios = menuSections.map((section, index) => {
 
-    return <FormControlLabel value={index} control={<Radio />} label={section.name} key={index} />
+    return <FormControlLabel value={index} control={<Radio checked={value == index}/>} label={section.name} key={index} />
       
   });
 
