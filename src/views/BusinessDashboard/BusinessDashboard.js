@@ -1,23 +1,16 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import { Business } from '../../state/business';
 import { Auth } from '../../state/auth';
 import { Menus } from '../../state/menus';
 import { db } from '../../firebase';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import BusinessIcon from '@material-ui/icons/Business';
-
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Slide from '@material-ui/core/Slide';
 import DeleteIcon from '@material-ui/icons/Delete';
-
-
-
 import CreateMenu from '../../components/CreateMenu';
+import CreateBusiness from '../../components/CreateBusiness';
 
 
 
@@ -30,12 +23,12 @@ const BusinessDashboard = ({ history }) => {
     initBusinessListener();
   }, []);
 
-  const submitBusiness = e => {
-    e.preventDefault();
+  const submitBusiness = (name, image) => {
 
     db.collection('businesses')
     .add({
-      name: e.target.businessName.value,
+      name: name,
+      image: image,
       owner: user.uid,
     })
     .catch(console.log);
@@ -93,13 +86,19 @@ const BusinessDashboard = ({ history }) => {
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    container: {
+      padding: '0px 0px'
+    },
+    createMenu: {
+      padding: '0px'
+    }
   }));
 
   const classes = useStyles();
 
   return (
     <>
-      <Container component="main" maxWidth="xs">
+      <Container className={classes.container} component="main" >
       { businessLoading && (
         <Slide direction="right" in={businessLoading }>
           <div>Business is Loading...</div>
@@ -108,25 +107,16 @@ const BusinessDashboard = ({ history }) => {
 
       { !businessLoading && business && (
         <>
-          <Typography component="h1" variant="h3">
-            { business.name }
-          </Typography>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.button}
-            endIcon={<DeleteIcon />}
-            onClick={deleteBusiness}
-          >
-            Delete
-          </Button>
+
+          {/* <BusinessCard business={business} deleteBusiness={deleteBusiness}/> */}
+        
           { menusLoading && <div>Loading Menus...</div> }
 
           { !menusLoading && menus.length > 0 && (
             <>
                 { menus.map(menu => {
                     return (
-                        <Container component="main" maxWidth="xs" key={menu.id}>
+                        <Container component="main"  key={menu.id}>
                         
                           
                             <Typography component="h1" variant="h5">
@@ -155,7 +145,9 @@ const BusinessDashboard = ({ history }) => {
           { !menusLoading && menus.length < 1 && (
             <>
               <Slide direction="right" in={!menusLoading && menus.length < 1}>
-                <Container component="main" maxWidth="xs">
+                <Container className={classes.createMenu}>
+
+    
                   <CreateMenu menuCreate={menuCreate} />
                 </Container>
               </Slide>
@@ -167,39 +159,9 @@ const BusinessDashboard = ({ history }) => {
       { !businessLoading && !business && (
         <>
           <Slide direction="right" in={!businessLoading && !business}>
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-              <Avatar className={classes.avatar}>
-                <BusinessIcon />
-              </Avatar>
-              <Typography component="h1" variant="h5">
-                Create Business
-              </Typography>
-              <form className={classes.form} onSubmit={submitBusiness} noValidate>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="businessName"
-                  label="Business Name"
-                  name="businessName"
-                  autoFocus
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Create Business / Website
-                </Button>
-              </form>
-            </div>
-    
-          </Container>
+            <Container component="main" >
+              <CreateBusiness  aSubmitBusiness={submitBusiness}/>
+            </Container>
           </Slide>
         </>
       ) }

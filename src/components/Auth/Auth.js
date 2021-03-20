@@ -19,6 +19,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Slide from '@material-ui/core/Slide';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import Copyright from '../../components/Copyright';
+
+
+
 const authContainerStyles = {
   display: 'flex',
   flexDirection: 'row',
@@ -30,18 +34,7 @@ const tabStyles = {
   width: '100%',
 }
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Fancy Menu
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
 const useStyles = makeStyles(theme => ({
   paper: {
