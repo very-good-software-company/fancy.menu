@@ -5,8 +5,8 @@ import Card from '@material-ui/core/Card';
 
 const MenuItem = ({ item }) => {
   const useStyles = makeStyles(theme => ({
-    card: {
-     
+    item: {
+      paddingBottom: '16px'
     },
     title: {
       color: '#9e9e9e',
@@ -26,7 +26,7 @@ const MenuItem = ({ item }) => {
 
   return (
     <>
-      <div>
+      <div className={classes.item}>
         <Typography className={classes.title} component="h6" variant="h6">
           { item.name }
         </Typography>

@@ -42,7 +42,7 @@ const AddItem = ({ itemCreate , menuSections}) => {
       margin: theme.spacing(3, 0, 2),
     },
     dots: {
-      padding: '0px 8px',
+      padding: '8px 0px 0px 18px',
       marginTop: '64px'
     }
   }));
@@ -59,8 +59,13 @@ const AddItem = ({ itemCreate , menuSections}) => {
       price: e.target.itemPrice.value,
       section: value
     };
-    
+
     itemCreate(item, value);
+
+    
+    e.target.itemDescription.value = '';
+    e.target.itemPrice.value = '';
+    e.target.itemName.value = '';
     
   }
 

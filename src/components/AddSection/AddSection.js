@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import CreateIcon from '@material-ui/icons/Create';
+import Grid from '@material-ui/core/Grid';
 
 const AddSection = ({ sectionCreate}) => {
 
@@ -40,11 +41,13 @@ const AddSection = ({ sectionCreate}) => {
     };
 
     sectionCreate(section);
+    e.target.sectionName.value = '';
     
   }
 
   return (
-    <div>
+    <Grid container >
+      <Grid item xs={8}>
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
@@ -71,7 +74,9 @@ const AddSection = ({ sectionCreate}) => {
             </Button>  
           </form>
         </div>
-    </div>
+      </Grid>
+      <Grid item xs={4}></Grid>
+    </Grid>
   );
 }
 
