@@ -12,8 +12,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CreateMenu from '../../components/CreateMenu';
 import CreateBusiness from '../../components/CreateBusiness';
 
-
-
 const BusinessDashboard = ({ history }) => {
   const { user } = Auth.useContainer();
   const { business, businessLoading, initBusinessListener } = Business.useContainer();
@@ -34,16 +32,14 @@ const BusinessDashboard = ({ history }) => {
     .catch(console.log);
   }
 
-  const menuCreate = e => {
-    e.preventDefault();
+  const menuCreate = menu => {
+    
     console.log('creating a menu');
 
     db.collection('businesses')
     .doc(business.id)
     .collection('menus')
-    .add({
-      title: e.target.menuName.value,
-    })
+    .add(menu)
     .catch(console.log);
   }
 
@@ -58,16 +54,6 @@ const BusinessDashboard = ({ history }) => {
     }
   }
 
-  const deleteBusiness = () => {
-    if(window.confirm("Are you sure you want to delete your business?")){
-      db.collection('businesses')
-      .doc(business.id)
-      .delete();
-    }
-
-  }
-
-  
   const useStyles = makeStyles(theme => ({
     paper: {
       marginTop: theme.spacing(8),
@@ -87,7 +73,8 @@ const BusinessDashboard = ({ history }) => {
       margin: theme.spacing(3, 0, 2),
     },
     container: {
-      padding: '0px 0px'
+      padding: '0px 0px',
+      maxWidth: '1200px'
     },
     createMenu: {
       padding: '0px'
@@ -106,10 +93,7 @@ const BusinessDashboard = ({ history }) => {
       ) }
 
       { !businessLoading && business && (
-        <>
-
-          {/* <BusinessCard business={business} deleteBusiness={deleteBusiness}/> */}
-        
+        <>        
           { menusLoading && <div>Loading Menus...</div> }
 
           { !menusLoading && menus.length > 0 && (
@@ -133,21 +117,16 @@ const BusinessDashboard = ({ history }) => {
                               Delete
                             </Button>
                           
-                        
                       </Container>
                     );
                   }) }
             </>
           ) }
 
-
-
           { !menusLoading && menus.length < 1 && (
             <>
               <Slide direction="right" in={!menusLoading && menus.length < 1}>
                 <Container className={classes.createMenu}>
-
-    
                   <CreateMenu menuCreate={menuCreate} />
                 </Container>
               </Slide>
@@ -159,7 +138,7 @@ const BusinessDashboard = ({ history }) => {
       { !businessLoading && !business && (
         <>
           <Slide direction="right" in={!businessLoading && !business}>
-            <Container component="main" >
+            <Container component="main" maxWidth={"xs"}>
               <CreateBusiness  aSubmitBusiness={submitBusiness}/>
             </Container>
           </Slide>
@@ -171,5 +150,3 @@ const BusinessDashboard = ({ history }) => {
 }
 
 export default BusinessDashboard;
-
-

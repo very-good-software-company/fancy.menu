@@ -10,13 +10,13 @@ const BusinessCard = ({ business, deleteBusiness }) => {
   const useStyles = makeStyles(theme => ({
 
     button: {
-      
       position: 'absolute',
       bottom: 0,
       right: 0
+      
     },
     paper: {
-      padding: '0px 24px',
+      padding: '0px 124px 0px 24px',
       position: 'relative',
       margin: 'auto'
     },
@@ -47,7 +47,7 @@ const BusinessCard = ({ business, deleteBusiness }) => {
         <Typography className={classes.title} component="h4" variant="h4">
           { business.name }
         </Typography>
-        {/* <Button
+        <Button
           variant="contained"
           color="secondary"
           className={classes.button}
@@ -55,7 +55,7 @@ const BusinessCard = ({ business, deleteBusiness }) => {
           onClick={deleteBusiness}
         >
           Delete
-        </Button> */}
+        </Button>
       </Paper>
     </>
   )

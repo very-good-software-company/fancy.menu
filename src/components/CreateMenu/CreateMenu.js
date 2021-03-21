@@ -9,14 +9,22 @@ import AddItem from '../AddItem';
 import AddSection from '../AddSection';
 import PreviewMenu from '../PreviewMenu';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
 
 const CreateMenu = ({ menuCreate }) => {
 
   const [menuName, setMenuName] = useState(null);
   const [menuSections, setMenuSections] = useState([]);
   const [menu, setMenu] = useState(null);
+  const [itemCreated, setItemCreated] = useState(false);
+
+  const createMenu = () => {
+    menuCreate(menu);
+  }
   
   const itemCreate = (item, sectionIndex) => {
+
 
     const sectionItems = menuSections[sectionIndex].items;
 
@@ -33,6 +41,8 @@ const CreateMenu = ({ menuCreate }) => {
 
     setMenuSections(sectionArr);
     setMenu({ ...menu, sections: sectionArr });
+
+    setItemCreated(true);
 
   }
 
@@ -59,6 +69,20 @@ const CreateMenu = ({ menuCreate }) => {
     setMenu(tempMenu);
 
     setMenuName(e.target.value);
+
+  }
+
+  const deleteSection = (sectionIndex) => {
+
+    let newArr
+    if(menuSections.length > 1){
+      newArr = menuSections.splice(sectionIndex, 1);
+    } else {
+      newArr = [];
+    }
+
+    setMenuSections(newArr);
+    setMenu({ ...menu, sections: newArr });
 
   }
 
@@ -120,13 +144,24 @@ const CreateMenu = ({ menuCreate }) => {
             <AddItem itemCreate={itemCreate} menuSections={menuSections}/> 
 
           )}
+          {itemCreated && (
+            <Button
+              onClick={createMenu}
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              endIcon={<LibraryAddCheckIcon />}
+            > Create Menu
+            </Button>  
+          )}
         </div>
       </Grid>
 
       {menu != null && (
         
         <Grid item xs={6} className={classes.half}>
-          <PreviewMenu menu={menu} />
+          <PreviewMenu menu={menu} deleteSection={deleteSection}/>
         </Grid>
       )}
 

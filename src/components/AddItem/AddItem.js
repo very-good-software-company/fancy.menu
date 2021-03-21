@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import CreateIcon from '@material-ui/icons/Create';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -12,7 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
 
-const AddItem = ({ itemCreate , menuSections}) => {
+const AddItem = ({ itemCreate , menuSections }) => {
 
   const [value, setValue] = useState(0);
 
@@ -117,15 +117,12 @@ const AddItem = ({ itemCreate , menuSections}) => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              endIcon={<CreateIcon />}
+              endIcon={<AddCircleOutlineIcon />}
             > Add Item
             </Button>
 
-            
           </form>
         </div>
-
-
       </Grid>
       <Grid item xs={4} className={classes.dots}>
 

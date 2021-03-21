@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import CreateIcon from '@material-ui/icons/Create';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Grid from '@material-ui/core/Grid';
 
 const AddSection = ({ sectionCreate}) => {
@@ -69,7 +69,7 @@ const AddSection = ({ sectionCreate}) => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              endIcon={<CreateIcon />}
+              endIcon={<AddCircleOutlineIcon />}
             > Add Section
             </Button>  
           </form>

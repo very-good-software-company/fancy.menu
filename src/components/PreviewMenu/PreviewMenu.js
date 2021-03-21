@@ -3,8 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import MenuSection from '../MenuSection';
+import DeleteWrapper from '../DeleteWrapper';
 
-const PreviewMenu = ({ menu }) => {
+const PreviewMenu = ({ menu, deleteSection }) => {
 
   const useStyles = makeStyles(theme => ({
     card: {
@@ -34,7 +35,7 @@ const PreviewMenu = ({ menu }) => {
         {
           menu.sections.map((section, index) => {
 
-            return <MenuSection key={ index } section={ section }/>
+            return <DeleteWrapper key={ index } section={ index } delete={deleteSection} child={ <MenuSection section={ section }/> } />
               
           })
         }
