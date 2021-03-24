@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-const DeleteWrapper = (props) => {
+const DeleteWrapper = ({aDelete, section, child}) => {
 
   const [show, setShow] = useState(true);
 
@@ -33,8 +33,8 @@ const DeleteWrapper = (props) => {
   
   return (
     <div className={classes.wrapper} onMouseEnter={showX} onMouseLeave={hideX}>
-      <div onClick={()=> {props.delete(props.section)}} className={classes.delete} hidden={show}>x</div>
-      { props.child }
+      <div onClick={()=> {aDelete(section)}} className={classes.delete} hidden={show}>x</div>
+      { child }
     </div>
   );
   

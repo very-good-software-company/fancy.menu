@@ -35,7 +35,8 @@ const PreviewMenu = ({ menu, deleteSection }) => {
         {
           menu.sections.map((section, index) => {
 
-            return <DeleteWrapper key={ index } section={ index } delete={deleteSection} child={ <MenuSection section={ section }/> } />
+            // return <DeleteWrapper key={ index } section={ index } aDelete={deleteSection} child={ <MenuSection section={ section }/> } />
+            return <MenuSection section={section} key={index}/> 
               
           })
         }

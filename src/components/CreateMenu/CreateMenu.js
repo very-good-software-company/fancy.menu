@@ -11,6 +11,7 @@ import PreviewMenu from '../PreviewMenu';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
+import SectionAccordian from '../SectionAccordian';
 
 const CreateMenu = ({ menuCreate }) => {
 
@@ -45,6 +46,41 @@ const CreateMenu = ({ menuCreate }) => {
     setItemCreated(true);
 
   }
+
+  const itemUpdate = (item, sectionIndex, itemIndex) => {
+
+
+    const sectionItems = menuSections[sectionIndex].items;
+
+    sectionItems[itemIndex] = item;
+
+    const itemsArr = [
+      ...sectionItems
+    ];
+
+    menuSections[sectionIndex].items = itemsArr;
+
+    const sectionArr = [
+      ...menuSections
+    ];
+
+    setMenuSections(sectionArr);
+    setMenu({ ...menu, sections: sectionArr });
+  }
+
+  const sectionUpdate = (section, sectionIndex) => {
+
+    menuSections[sectionIndex] = section;
+
+    const newArr = [
+      ...menuSections
+    ];
+
+    setMenuSections(newArr);
+    setMenu({ ...menu, sections: newArr });
+
+  }
+
 
   const sectionCreate = (section) => {
 
@@ -87,6 +123,9 @@ const CreateMenu = ({ menuCreate }) => {
   }
 
   const useStyles = makeStyles(theme => ({
+    container: {
+      height: 'calc(100vh - 80px)'
+    },
     paper: {
       display: 'flex',
       flexDirection: 'column',
@@ -104,14 +143,19 @@ const CreateMenu = ({ menuCreate }) => {
       margin: theme.spacing(3, 0, 2),
     },
     half: {
-      padding: '32px'
+      padding: '32px',
+      overflowY: 'auto',
+      height: '100%'
     }
   }));
 
   const classes = useStyles();
+  
+
+  
 
   return (
-    <Grid container >
+    <Grid container className={classes.container}>
       <Grid item xs={6} className={classes.half}>
         <CssBaseline />
         <div className={classes.paper}>
@@ -140,9 +184,10 @@ const CreateMenu = ({ menuCreate }) => {
 
           )}
           {menuSections.length > 0 && (
-
-            <AddItem itemCreate={itemCreate} menuSections={menuSections}/> 
-
+            <>
+              <AddItem itemCreate={itemCreate} menuSections={menuSections}/> 
+              <SectionAccordian sections={menuSections} setItem={itemUpdate} setSection={sectionUpdate} />
+            </>
           )}
           {itemCreated && (
             <Button

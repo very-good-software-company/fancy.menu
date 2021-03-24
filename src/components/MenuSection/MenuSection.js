@@ -22,15 +22,11 @@ const MenuSection = ({ section }) => {
           { section.name }
         </Typography>
 
-
         {
           section.items.map((item, index) => {
-
-            return <MenuItem key={ index } item={ item }/>
-              
+            return <MenuItem key={ index } item={ item }/> 
           })
         }
-
 
       </div>
     </>

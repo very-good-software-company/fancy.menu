@@ -74,7 +74,8 @@ const BusinessDashboard = ({ history }) => {
     },
     container: {
       padding: '0px 0px',
-      maxWidth: '1200px'
+      maxWidth: '1200px',
+      maxHeight: 'calc(100vh - 80px)'
     },
     createMenu: {
       padding: '0px'
