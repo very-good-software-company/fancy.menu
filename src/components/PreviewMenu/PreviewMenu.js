@@ -1,9 +1,9 @@
-import React, { useRef }from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import MenuSection from '../MenuSection';
-import DeleteWrapper from '../DeleteWrapper';
+
 
 const PreviewMenu = ({ menu, deleteSection }) => {
 

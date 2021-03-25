@@ -124,9 +124,9 @@ const BusinessDashboard = ({ history }) => {
             </>
           ) }
 
-          { !menusLoading && menus.length < 1 && (
+          { !menusLoading  && (
             <>
-              <Slide direction="right" in={!menusLoading && menus.length < 1}>
+              <Slide direction="right" in>
                 <Container className={classes.createMenu}>
                   <CreateMenu menuCreate={menuCreate} />
                 </Container>

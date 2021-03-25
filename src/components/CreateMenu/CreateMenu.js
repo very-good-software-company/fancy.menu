@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -12,13 +12,49 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
 import SectionAccordian from '../SectionAccordian';
+import localforage from 'localforage';
 
 const CreateMenu = ({ menuCreate }) => {
 
-  const [menuName, setMenuName] = useState(null);
-  const [menuSections, setMenuSections] = useState([]);
-  const [menu, setMenu] = useState(null);
+  console.log('render create menu');
+  const [menu, setMenu] = useState({name: '', sections: []});
   const [itemCreated, setItemCreated] = useState(false);
+  const [menuName, setMenuName] = useState('');
+
+  useEffect(()=> {
+    getLocalStorage();
+    return ()=>{};
+  }, []);
+
+  const setLocalStorage = (aMenu) => {
+
+    localforage.setItem('menu', aMenu).then(()=> {}).catch(err => {
+        console.log('cannont set local storage ',err);
+    });
+    
+    setMenu(aMenu)
+
+  }
+
+  const getLocalStorage = () => {
+
+    localforage.getItem('menu').then(function(value) {
+      
+        console.log(value);
+
+      if(value != null){
+        
+          setMenu(value);
+
+          setMenuName(value.name)
+        
+      }
+
+    }).catch(function(err) {
+  
+        console.log(err);
+    });
+  }
 
   const createMenu = () => {
     menuCreate(menu);
@@ -27,22 +63,20 @@ const CreateMenu = ({ menuCreate }) => {
   const itemCreate = (item, sectionIndex) => {
 
 
-    const sectionItems = menuSections[sectionIndex].items;
+    const sectionItems = menu.sections[sectionIndex].items;
 
     const itemsArr = [
       ...sectionItems,
       item
     ];
 
-    menuSections[sectionIndex].items = itemsArr;
+    menu.sections[sectionIndex].items = itemsArr;
 
     const sectionArr = [
-      ...menuSections
+      ...menu.sections
     ];
 
-    setMenuSections(sectionArr);
-    setMenu({ ...menu, sections: sectionArr });
-
+    setLocalStorage({ ...menu, sections: sectionArr })
     setItemCreated(true);
 
   }
@@ -50,7 +84,7 @@ const CreateMenu = ({ menuCreate }) => {
   const itemUpdate = (item, sectionIndex, itemIndex) => {
 
 
-    const sectionItems = menuSections[sectionIndex].items;
+    const sectionItems = menu.sections[sectionIndex].items;
 
     sectionItems[itemIndex] = item;
 
@@ -58,67 +92,61 @@ const CreateMenu = ({ menuCreate }) => {
       ...sectionItems
     ];
 
-    menuSections[sectionIndex].items = itemsArr;
+    menu.sections[sectionIndex].items = itemsArr;
 
     const sectionArr = [
-      ...menuSections
+      ...menu.sections
     ];
 
-    setMenuSections(sectionArr);
     setMenu({ ...menu, sections: sectionArr });
+    setLocalStorage()
   }
 
   const sectionUpdate = (section, sectionIndex) => {
 
-    menuSections[sectionIndex] = section;
+    menu.sections[sectionIndex] = section;
 
     const newArr = [
-      ...menuSections
+      ...menu.sections
     ];
 
-    setMenuSections(newArr);
-    setMenu({ ...menu, sections: newArr });
-
+    setLocalStorage({ ...menu, sections: newArr })
   }
 
 
   const sectionCreate = (section) => {
 
     const newArr = [
-      ...menuSections,
+      ...menu.sections,
       section
     ];
-
-    setMenuSections(newArr);
-    setMenu({ ...menu, sections: newArr });
-
+    
+    setLocalStorage({ ...menu, sections: newArr })
   }
 
   const menuNameChange = (e) => {
     e.preventDefault();
-    let tempMenu = {sections: [], change:false};
+    let tempMenu = {sections: []};
     if(menu != null){
       tempMenu = menu;
     }
     
     tempMenu.name = e.target.value;
-    setMenu(tempMenu);
-
     setMenuName(e.target.value);
-
+    setMenu(tempMenu);
+    
   }
 
   const deleteSection = (sectionIndex) => {
 
     let newArr
-    if(menuSections.length > 1){
-      newArr = menuSections.splice(sectionIndex, 1);
+    if(menu.sections.length > 1){
+      newArr = menu.sections.splice(sectionIndex, 1);
     } else {
       newArr = [];
     }
 
-    setMenuSections(newArr);
-    setMenu({ ...menu, sections: newArr });
+    setLocalStorage({ ...menu, sections: newArr })
 
   }
 
@@ -151,9 +179,6 @@ const CreateMenu = ({ menuCreate }) => {
 
   const classes = useStyles();
   
-
-  
-
   return (
     <Grid container className={classes.container}>
       <Grid item xs={6} className={classes.half}>
@@ -176,17 +201,18 @@ const CreateMenu = ({ menuCreate }) => {
               name="menuName"
               autoFocus
               onChange={menuNameChange}
+              value={menuName}
             />          
 
-          {menuName != null && menuName.length > 3 && (
+          {menu && menu.name && menu.name != null && menu.name.length > 3 && (
 
             <AddSection sectionCreate={sectionCreate}/> 
 
           )}
-          {menuSections.length > 0 && (
+          {menu && menu.sections && menu.sections.length > 0 && (
             <>
-              <AddItem itemCreate={itemCreate} menuSections={menuSections}/> 
-              <SectionAccordian sections={menuSections} setItem={itemUpdate} setSection={sectionUpdate} />
+              <AddItem itemCreate={itemCreate} menuSections={menu.sections}/> 
+              <SectionAccordian sections={menu.sections} setItem={itemUpdate} setSection={sectionUpdate} />
             </>
           )}
           {itemCreated && (
@@ -203,7 +229,7 @@ const CreateMenu = ({ menuCreate }) => {
         </div>
       </Grid>
 
-      {menu != null && (
+      {menu && menu.name && (
         
         <Grid item xs={6} className={classes.half}>
           <PreviewMenu menu={menu} deleteSection={deleteSection}/>

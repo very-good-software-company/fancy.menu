@@ -6,7 +6,7 @@ import { Business } from './business';
 
 const initial = {
   menus: [],
-  menusLoading: false,
+  menusLoading: true,
   menusError: null,
 }
 
