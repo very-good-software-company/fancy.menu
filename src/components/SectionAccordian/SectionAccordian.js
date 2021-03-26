@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
@@ -56,6 +56,20 @@ const SectionAccordion = ({ sections, setSection, setItem }) => {
     setExpanded(newExpanded ? panel : false);
   };
 
+  const useStyles = makeStyles(theme => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      width: '100%'
+    },
+    title: {
+      marginBottom: '8px'
+    }
+  }));
+
+  const classes = useStyles();
 
   const accordians = sections.map((section, index) => {
 
@@ -75,7 +89,10 @@ const SectionAccordion = ({ sections, setSection, setItem }) => {
   });
 
   return (
-    <div style={{width: '100%'}}>
+    <div className={classes.paper}>
+      <Typography component="h1" variant="h5" className={classes.title}>
+          Sections
+      </Typography>
       {accordians}
     </div>
   );

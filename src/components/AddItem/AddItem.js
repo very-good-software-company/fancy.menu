@@ -74,16 +74,18 @@ const AddItem = ({ itemCreate , menuSections }) => {
   });
 
   return (
-    <Grid container >
-      <Grid item xs={8}>
+    
+      <>
 
         <CssBaseline />
         <div className={classes.paper}>
           
           <Typography component="h1" variant="h5">
-          Add an Item
+          Add Item
           </Typography>
           <form className={classes.form} onSubmit={submitItem} noValidate>
+          <Grid container >
+          <Grid item xs={8}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -111,6 +113,18 @@ const AddItem = ({ itemCreate , menuSections }) => {
               label="Item Price"
               name="itemPrice"
             />
+            </Grid>
+            <Grid item xs={4} className={classes.dots}>
+
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Section</FormLabel>
+          <RadioGroup aria-label="section" name="section1" value={value} onChange={handleChange}>
+          {radios}
+          </RadioGroup>
+        </FormControl>
+
+      </Grid>
+      </Grid>
             <Button
               type="submit"
               fullWidth
@@ -123,18 +137,9 @@ const AddItem = ({ itemCreate , menuSections }) => {
 
           </form>
         </div>
-      </Grid>
-      <Grid item xs={4} className={classes.dots}>
-
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Section</FormLabel>
-          <RadioGroup aria-label="section" name="section1" value={value} onChange={handleChange}>
-          {radios}
-          </RadioGroup>
-        </FormControl>
-
-      </Grid>
-     </Grid>
+      
+      
+     </>
   );
 }
 

@@ -47,11 +47,11 @@ const AddSection = ({ sectionCreate}) => {
 
   return (
     <Grid container >
-      <Grid item xs={8}>
+      <Grid item xs={12}>
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
-          Add an Section
+          Add Section
           </Typography>
           <form className={classes.form} onSubmit={submitSection} noValidate>
             <TextField
@@ -75,7 +75,6 @@ const AddSection = ({ sectionCreate}) => {
           </form>
         </div>
       </Grid>
-      <Grid item xs={4}></Grid>
     </Grid>
   );
 }

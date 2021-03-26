@@ -47,6 +47,12 @@ const CreateMenu = ({ menuCreate }) => {
           setMenu(value);
 
           setMenuName(value.name)
+
+          if(value.sections && value.sections.length){
+            if(value.sections[0].items && value.sections[0].items.length){
+              setItemCreated(true);
+            }
+          }
         
       }
 
