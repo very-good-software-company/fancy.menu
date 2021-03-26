@@ -24,7 +24,8 @@ const Main = ({ pageContext: { menu } }) => {
       boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
       maxWidth: '500px',
       borderRadius: '8px',
-      margin: 'auto'
+      margin: 'auto',
+      backgroundColor: '#f5f5f5'
     },
     section: {
       paddingBottom: '32px'
@@ -69,7 +70,7 @@ const Main = ({ pageContext: { menu } }) => {
     }
   });
 
-  document.body.style.backgroundColor = '#f5f5f5';
+  // document.body.style.backgroundColor = '#f5f5f5';
 
   const sections = menu.sections.map((section, index) => {
   
