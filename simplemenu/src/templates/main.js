@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 
-
 const Main = ({ pageContext: { menu } }) => {
-
   const [styles, setStyles] = useState({
     title: {
       padding: '16px 0px',
@@ -22,12 +20,17 @@ const Main = ({ pageContext: { menu } }) => {
     },
     innerContainer: {
       padding: '120px 40px 0px',
-      textAlign: 'right'
+      textAlign: 'right',
+      boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+      maxWidth: '500px',
+      borderRadius: '8px',
+      margin: 'auto'
     },
     section: {
       paddingBottom: '32px'
     },
     sectionTitle: {
+      margin: '0',
       fontSize: '1.5rem',
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: '400',
@@ -38,6 +41,7 @@ const Main = ({ pageContext: { menu } }) => {
       paddingBottom: '16px'
     },
     itemTitle: {
+      margin: '0',
       color: '#9e9e9e',
       fontSize: '14px',
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -46,6 +50,7 @@ const Main = ({ pageContext: { menu } }) => {
       letterSpacing: '0.0075em'
     },
     itemDescription: {
+      margin: '0',
       color: '#9e9e9e',
       fontSize: '12px',
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -54,6 +59,7 @@ const Main = ({ pageContext: { menu } }) => {
       letterSpacing: '0.00938em'
     },
     itemPrice: {
+      margin: '0',
       color: '#9e9e9e',
       fontSize: '12px',
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -62,6 +68,8 @@ const Main = ({ pageContext: { menu } }) => {
       letterSpacing: '0.00938em'
     }
   });
+
+  document.body.style.backgroundColor = '#f5f5f5';
 
   const sections = menu.sections.map((section, index) => {
   
@@ -78,15 +86,13 @@ const Main = ({ pageContext: { menu } }) => {
 
                 })
               }
-            </div>
-        
+            </div> 
   })
   
-
   return (
     <div style={styles.container}>
       <div style={styles.innerContainer}>
-        { menu && <h1 style={styles.title}>{ menu.title }</h1> }
+        { menu && <h1 style={styles.title}>{ menu.name }</h1> }
         { !menu && <h1 style={styles.title}>No Menu!</h1> }
         {sections}
       </div>
