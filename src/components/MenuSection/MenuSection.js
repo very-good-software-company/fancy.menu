@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '../MenuItem';
 
-const MenuSection = ({ section }) => {
+const MenuSection = ({ section, dark }) => {
   const useStyles = makeStyles(theme => ({
     title: {
-      
+      color: dark ? '#cfcfcf' : '#000a12'
     },
     section: {
       paddingBottom: '32px'
@@ -16,7 +16,7 @@ const MenuSection = ({ section }) => {
   const classes = useStyles();
 
   return (
-    <>
+    
       <div className={classes.section}>
         <Typography className={classes.title} component="h5" variant="h5">
           { section.name }
@@ -29,7 +29,7 @@ const MenuSection = ({ section }) => {
         }
 
       </div>
-    </>
+    
   )
 }
 

@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import AddItem from '../AddItem';
 import AddSection from '../AddSection';
-import PreviewMenu from '../PreviewMenu';
+import MenuTabs from '../MenuTabs';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
@@ -145,15 +145,30 @@ const CreateMenu = ({ menuCreate }) => {
 
   const deleteSection = (sectionIndex) => {
 
-    let newArr
-    if(menu.sections.length > 1){
-      newArr = menu.sections.splice(sectionIndex, 1);
-    } else {
-      newArr = [];
-    }
+   const newArr = [
+     ...menu.sections.slice(0, sectionIndex),
+     ...menu.sections.slice(sectionIndex + 1)
+   ]
 
     setLocalStorage({ ...menu, sections: newArr })
 
+  }
+
+  const deleteItem = (sectionIndex, itemIndex) => {
+
+
+    console.log('delete : ', sectionIndex, itemIndex);
+
+    const newArr = [
+      ...menu.sections[sectionIndex].items.slice(0, itemIndex),
+      ...menu.sections[sectionIndex].items.slice(itemIndex + 1)
+    ]
+
+    const section = menu.sections[sectionIndex];
+    section.items = newArr;
+ 
+     
+    sectionUpdate(sectionIndex, section);
   }
 
   const useStyles = makeStyles(theme => ({
@@ -218,7 +233,7 @@ const CreateMenu = ({ menuCreate }) => {
           {menu && menu.sections && menu.sections.length > 0 && (
             <>
               <AddItem itemCreate={itemCreate} menuSections={menu.sections}/> 
-              <SectionAccordian sections={menu.sections} setItem={itemUpdate} setSection={sectionUpdate} />
+              <SectionAccordian sections={menu.sections} setItem={itemUpdate} setSection={sectionUpdate} deleteSection={deleteSection} deleteItem={deleteItem}/>
             </>
           )}
           {itemCreated && (
@@ -238,7 +253,7 @@ const CreateMenu = ({ menuCreate }) => {
       {menu && menu.name && (
         
         <Grid item xs={6} className={classes.half}>
-          <PreviewMenu menu={menu} deleteSection={deleteSection}/>
+          <MenuTabs menu={menu} />
         </Grid>
       )}
 

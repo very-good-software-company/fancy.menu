@@ -4,8 +4,10 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Fab from '@material-ui/core/Fab';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
-const EditItem = ({ item, setItem }) => {
+const EditItem = ({ item, setItem, itemIndex, deleteItem, sectionIndex }) => {
 
   const useStyles = makeStyles(theme => ({
     paper: {
@@ -13,10 +15,17 @@ const EditItem = ({ item, setItem }) => {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      position: 'relative'
     },
     form: {
       width: '100%',
       marginTop: theme.spacing(1),
+    },
+    fab: {
+      position: 'absolute',
+      top: theme.spacing(1),
+      right: theme.spacing(1),
+      backgroundColor: '#e53935'
     }
   }));
 
@@ -58,6 +67,12 @@ const EditItem = ({ item, setItem }) => {
     setItem(aItem, aItem.sectionIndex, aItem.itemIndex);
   }
 
+  const onDeleteItem = () => {
+
+    deleteItem(sectionIndex, itemIndex);
+
+  }
+
   return (
     <Grid container >
       <Grid item xs={12}>
@@ -66,6 +81,9 @@ const EditItem = ({ item, setItem }) => {
           <Typography component="h1" variant="h5">
           Edit Item
           </Typography>
+          <Fab size="small" color="primary" aria-label="add" className={classes.fab} onClick={onDeleteItem}>
+            <DeleteForeverIcon />
+          </Fab>
           <form className={classes.form} noValidate>
             <TextField
               variant="outlined"

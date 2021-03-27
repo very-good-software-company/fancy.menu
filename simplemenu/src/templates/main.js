@@ -15,7 +15,6 @@ const Main = ({ pageContext: { menu } }) => {
     },
     container: {
       height: '100%',
-      padding: '32px',
       overflowY: 'auto'
     },
     innerContainer: {
@@ -23,7 +22,7 @@ const Main = ({ pageContext: { menu } }) => {
       textAlign: 'right',
       boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
       maxWidth: '500px',
-      borderRadius: '8px',
+      borderRadius: '0px',
       margin: 'auto',
       backgroundColor: '#f5f5f5'
     },

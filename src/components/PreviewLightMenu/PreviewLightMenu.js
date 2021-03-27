@@ -5,15 +5,15 @@ import Paper from '@material-ui/core/Paper';
 import MenuSection from '../MenuSection';
 
 
-const PreviewMenu = ({ menu, deleteSection }) => {
+const PreviewLightMenu = ({ menu, deleteSection }) => {
 
   const useStyles = makeStyles(theme => ({
     card: {
       padding: '120px 40px 0px',
-      textAlign: 'right'
+      textAlign: 'left'
     },
     title: {
-      borderBottom: 'solid 2px #ffca28',
+      borderBottom: 'solid 2px #000000',
       padding: '16px 0px',
       marginBottom: '64px'
     },
@@ -26,7 +26,7 @@ const PreviewMenu = ({ menu, deleteSection }) => {
   
   return (
     <>
-      <Paper className={classes.card}>
+      <Paper className={classes.card} square={true}>
 
         <Typography className={classes.title} component="h1" variant="h3">
           { menu.name }
@@ -47,4 +47,4 @@ const PreviewMenu = ({ menu, deleteSection }) => {
 
 }
 
-export default PreviewMenu;
+export default PreviewLightMenu;

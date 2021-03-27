@@ -41,6 +41,7 @@ const BusinessDashboard = ({ history }) => {
     .collection('menus')
     .add(menu)
     .catch(console.log);
+    
   }
 
   const deleteMenu = menuId => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -35,6 +35,9 @@ const BusinessCard = ({ business, deleteBusiness }) => {
       display: 'inline-block',
       verticalAlign: 'top',
       marginTop: '16px'
+    },
+    deleteIcon: {
+      color: '#e53935'
     }
   }));
   
@@ -47,15 +50,13 @@ const BusinessCard = ({ business, deleteBusiness }) => {
         <Typography className={classes.title} component="h4" variant="h4">
           { business.name }
         </Typography>
-        <Button
-          variant="contained"
-          color="secondary"
+        <IconButton
+          aria-label="delete"
           className={classes.button}
-          endIcon={<DeleteIcon />}
           onClick={deleteBusiness}
         >
-          Delete
-        </Button>
+          <DeleteIcon className={classes.deleteIcon}/>
+        </IconButton>
       </Paper>
     </>
   )

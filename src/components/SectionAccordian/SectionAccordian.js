@@ -48,7 +48,7 @@ const AccordionDetails = withStyles((theme) => ({
   },
 }))(MuiAccordionDetails);
 
-const SectionAccordion = ({ sections, setSection, setItem }) => {
+const SectionAccordion = ({ sections, setSection, setItem, deleteSection, deleteItem }) => {
 
   const [expanded, setExpanded] = useState(null);
 
@@ -66,6 +66,9 @@ const SectionAccordion = ({ sections, setSection, setItem }) => {
     },
     title: {
       marginBottom: '8px'
+    },
+    accordian: {
+      width: '100%'
     }
   }));
 
@@ -74,13 +77,13 @@ const SectionAccordion = ({ sections, setSection, setItem }) => {
   const accordians = sections.map((section, index) => {
 
 
-      return  <Accordion square expanded={expanded === index} onChange={handleChange(index)} key={index}>
+      return  <Accordion square expanded={expanded === index} onChange={handleChange(index)} key={index} className={classes.accordian}>
                 <AccordionSummary aria-controls={`panel_content_${index}`} id={`panel_header_${index}`} expandIcon={<ExpandMoreIcon />}>
                   <Typography>{section.name}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   
-                  <EditSection section={section}  setItem={setItem} setSection={setSection} sectionIndex={index}/>
+                  <EditSection section={section}  setItem={setItem} setSection={setSection} sectionIndex={index} deleteSection={deleteSection} deleteItem={deleteItem}/>
 
                 </AccordionDetails>
               </Accordion>

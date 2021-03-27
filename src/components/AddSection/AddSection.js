@@ -6,8 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Grid from '@material-ui/core/Grid';
+import AddSectionTags from '../AddSectionTags';
 
-const AddSection = ({ sectionCreate}) => {
+
+const AddSection = ({ sectionCreate }) => {
 
   const useStyles = makeStyles(theme => ({
     paper: {
@@ -37,7 +39,8 @@ const AddSection = ({ sectionCreate}) => {
 
     const section = {
       name: e.target.sectionName.value,
-      items: []
+      items: [],
+      tags: []
     };
 
     sectionCreate(section);
@@ -63,6 +66,7 @@ const AddSection = ({ sectionCreate}) => {
               label="Section Name"
               name="sectionName"
             />
+            <AddSectionTags />
             <Button
               type="submit"
               fullWidth
@@ -73,6 +77,9 @@ const AddSection = ({ sectionCreate}) => {
             > Add Section
             </Button>  
           </form>
+
+          
+
         </div>
       </Grid>
     </Grid>

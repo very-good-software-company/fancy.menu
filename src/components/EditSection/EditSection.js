@@ -5,8 +5,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import EditItem from '../EditItem';
 import Grid from '@material-ui/core/Grid';
+import Fab from '@material-ui/core/Fab';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import AddSectionTags from '../AddSectionTags';
 
-const EditSection = ({ section, sectionIndex, setSection, setItem }) => {
+const EditSection = ({ section, sectionIndex, setSection, setItem, deleteSection, deleteItem }) => {
 
   const [tempSection, setTempSection] = useState(section);
 
@@ -16,12 +19,19 @@ const EditSection = ({ section, sectionIndex, setSection, setItem }) => {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      position: 'relative'
     },
 
     form: {
       width: '100%',
       marginTop: theme.spacing(1),
     },
+    fab: {
+      position: 'absolute',
+      top: theme.spacing(1),
+      right: theme.spacing(1),
+      backgroundColor: '#e53935'
+    }
   }));
 
   const classes = useStyles();
@@ -51,14 +61,27 @@ const EditSection = ({ section, sectionIndex, setSection, setItem }) => {
     setSection(aTempSection, sectionIndex)
   }
 
+  const onDeleteSection = () => {
+
+
+    console.log('delete : ', sectionIndex);
+
+    deleteSection(sectionIndex);
+
+  }
+
   return (
     <Grid container >
       <Grid item xs={12}>
         <CssBaseline />
         <div className={classes.paper}>
+
           <Typography component="h1" variant="h5">
           Edit Section
           </Typography>
+          <Fab size="small" color="primary" aria-label="add" className={classes.fab} onClick={onDeleteSection}>
+            <DeleteForeverIcon />
+          </Fab>
           <form className={classes.form} noValidate>
             <TextField
               variant="outlined"
@@ -72,10 +95,15 @@ const EditSection = ({ section, sectionIndex, setSection, setItem }) => {
               defaultValue={tempSection.name}
             />
           </form>
+          {/* {section.tags && (
+            <AddSectionTags section={section} sectionIndex={sectionIndex} />
+          )} */}
+          
+
         </div>
 
         {menuItems.map((item, index) => {
-          return <EditItem item={item} key={index} setItem={setItem}/>
+          return <EditItem item={item} key={index} setItem={setItem} itemIndex={index} deleteItem={deleteItem} sectionIndex={sectionIndex}/>
         })}
 
       </Grid>
