@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -11,16 +11,27 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
+import AddItemTags from '../AddItemTags';
+import Paper from '@material-ui/core/Paper';
 
 const AddItem = ({ itemCreate , menuSections }) => {
 
   const [value, setValue] = useState(0);
+  const [itemTags, setItemTags] = useState([]);
 
   const handleChange = (event) => {
 
     setValue(event.target.value);
 
   };
+
+
+  useEffect(()=> {
+    document.addEventListener('item_tag_update', e => {
+      setItemTags(e.detail);
+    })
+    return ()=>{};
+  }, []);
 
   const useStyles = makeStyles(theme => ({
     paper: {
@@ -41,8 +52,13 @@ const AddItem = ({ itemCreate , menuSections }) => {
       margin: theme.spacing(3, 0, 2),
     },
     dots: {
-      padding: '8px 0px 0px 18px',
-      marginTop: '64px'
+      padding: '8px 0px 8px 18px',
+      marginTop: '8px'
+    },
+    radioContainer: {
+      width: '100%',
+      height: '100%',
+      padding: '16px'
     }
   }));
 
@@ -56,6 +72,7 @@ const AddItem = ({ itemCreate , menuSections }) => {
       name: e.target.itemName.value,
       description: e.target.itemDescription.value,
       price: e.target.itemPrice.value,
+      tags: itemTags,
       section: value
     };
 
@@ -64,7 +81,16 @@ const AddItem = ({ itemCreate , menuSections }) => {
     e.target.itemDescription.value = '';
     e.target.itemPrice.value = '';
     e.target.itemName.value = '';
+
+    resetTags();
     
+  }
+
+  const resetTags = () => {
+
+    let event = new CustomEvent("add_tag_reset", {bubbles: true});
+    document.dispatchEvent(event);
+
   }
 
   const radios = menuSections.map((section, index) => {
@@ -114,17 +140,21 @@ const AddItem = ({ itemCreate , menuSections }) => {
               name="itemPrice"
             />
             </Grid>
-            <Grid item xs={4} className={classes.dots}>
+                <Grid item xs={4} className={classes.dots}>
 
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Section</FormLabel>
-          <RadioGroup aria-label="section" name="section1" value={value} onChange={handleChange}>
-          {radios}
-          </RadioGroup>
-        </FormControl>
+                  <Paper className={classes.radioContainer}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">Section</FormLabel>
+                      <RadioGroup aria-label="section" name="section1" value={value} onChange={handleChange}>
+                      {radios}
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                  
 
-      </Grid>
-      </Grid>
+              </Grid>
+            </Grid>
+            <AddItemTags />
             <Button
               type="submit"
               fullWidth

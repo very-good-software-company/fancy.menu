@@ -23,8 +23,14 @@ const CreateMenu = ({ menuCreate }) => {
 
   useEffect(()=> {
     getLocalStorage();
+
+    document.addEventListener('item_tag_update', ({tags, itemIndex}) => {
+      console.log('event heard: ', tags, itemIndex);
+    })
     return ()=>{};
   }, []);
+
+
 
   const setLocalStorage = (aMenu) => {
 

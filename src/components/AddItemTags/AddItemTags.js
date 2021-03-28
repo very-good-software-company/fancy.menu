@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 
-const AddSectionTags = ({sendTag}) => {
+
+
+const AddItemTags = () => {
+
   const tags = [
     { key: 0, abbr:'VE', label: 'Vegan', set: false },
     { key: 1, abbr:'VT', label: 'Vegitarian', set: false },
@@ -13,6 +16,13 @@ const AddSectionTags = ({sendTag}) => {
   ]
   
   const [tagData, setTagData] = useState(tags);
+
+  useEffect(()=> {
+    document.addEventListener('add_tag_reset', e => {
+      setTagData(tags);
+    })
+    return ()=>{};
+  }, []);
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,6 +37,8 @@ const AddSectionTags = ({sendTag}) => {
       margin: theme.spacing(0.5),
     },
   }));
+
+  
 
   const classes = useStyles();
 
@@ -46,6 +58,15 @@ const AddSectionTags = ({sendTag}) => {
     ]
 
     setTagData(tagArr);
+
+    sendTags(tagArr);
+
+  }
+
+  const sendTags = tagArr => {
+
+    let event = new CustomEvent("item_tag_update", {bubbles: true, detail: tagArr});
+    document.dispatchEvent(event);
 
   }
 
@@ -71,4 +92,4 @@ const AddSectionTags = ({sendTag}) => {
   );
 }
 
-export default AddSectionTags;
+export default AddItemTags;
