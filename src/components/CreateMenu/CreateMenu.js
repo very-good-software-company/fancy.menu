@@ -110,8 +110,7 @@ const CreateMenu = ({ menuCreate }) => {
       ...menu.sections
     ];
 
-    setMenu({ ...menu, sections: sectionArr });
-    setLocalStorage()
+    setLocalStorage({ ...menu, sections: sectionArr })
   }
 
   const sectionUpdate = (section, sectionIndex) => {

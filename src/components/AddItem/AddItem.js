@@ -20,11 +20,8 @@ const AddItem = ({ itemCreate , menuSections }) => {
   const [itemTags, setItemTags] = useState([]);
 
   const handleChange = (event) => {
-
     setValue(event.target.value);
-
   };
-
 
   useEffect(()=> {
     document.addEventListener('item_tag_update', e => {
@@ -100,9 +97,7 @@ const AddItem = ({ itemCreate , menuSections }) => {
   });
 
   return (
-    
       <>
-
         <CssBaseline />
         <div className={classes.paper}>
           
@@ -167,13 +162,8 @@ const AddItem = ({ itemCreate , menuSections }) => {
 
           </form>
         </div>
-      
-      
      </>
   );
 }
 
 export default AddItem;
-
-
-
