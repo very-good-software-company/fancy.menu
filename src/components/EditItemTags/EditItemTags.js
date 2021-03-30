@@ -4,8 +4,6 @@ import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 
-
-
 const EditItemTags = ({ item }) => {
 
   let tags = [];

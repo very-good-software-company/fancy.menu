@@ -10,6 +10,8 @@ const NotFound = lazy(() => import('./views/NotFound'));
 const Routes = () => {
   const { user, isAuthenticating } = AuthState.useContainer();
 
+  // TODO nice loading screens
+
   return (
     <>
       { isAuthenticating && <div>Authenticating...</div> }
