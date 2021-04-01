@@ -21,6 +21,7 @@ const EditItemTags = ({ item }) => {
       listStyle: 'none',
       padding: theme.spacing(0.5),
       margin: 0,
+      marginTop: 12,
       width: '100%'
     },
     chip: {
