@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sean's Place</title>
+  <meta name="description" content="Menu for Sean's Place">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,700&display=swap">
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Google+Sans:400,500,700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 20px;
+    }
+    
+    .menu-title {
+      font-family: 'Montserrat', sans-serif;
+      color: #333333;
+      font-size: 2.4rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #9b4dca;
+      padding-bottom: 0.5rem;
+      
+    }
+    
+    .menu-section {
+      font-family: 'Montserrat', sans-serif;
+      color: #9b4dca;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid #eeeeee;
+      padding-bottom: 0.25rem;
+      
+    }
+    
+    .section-description {
+      color: #666666;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      
+    }
+    
+    .subsection-container {
+      margin-left: 20px;
+    }
+    
+    .menu-subsection {
+      font-family: 'Montserrat', sans-serif;
+      color: #9b4dca;
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      
+    }
+    
+    .subsection-description {
+      color: #666666;
+      font-style: italic;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      
+    }
+    
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #eeeeee;
+      
+    }
+    
+    .menu-item-subsection {
+      margin-left: 15px;
+    }
+    
+    .item-details {
+      flex: 1;
+    }
+    
+    .item-name {
+      font-family: 'Montserrat', sans-serif;
+      color: #333333;
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+      
+    }
+    
+    .item-name.sold-out {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+    
+    .item-description {
+      color: #666666;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      
+    }
+    
+    .dietary-info {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #666666;
+      font-style: italic;
+    }
+    
+    .item-price {
+      color: #9b4dca;
+      font-weight: 600;
+      margin-left: 1.5rem;
+      font-size: 1.3rem;
+      white-space: nowrap;
+      
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      
+      .container {
+        padding: 15px;
+      }
+      
+      .menu-title {
+        font-size: 2rem;
+      }
+      
+      .menu-section {
+        font-size: 1.6rem;
+      }
+      
+      .menu-subsection {
+        font-size: 1.3rem;
+      }
+      
+      .item-name {
+        font-size: 1.2rem;
+      }
+      
+      .item-description {
+        font-size: 1rem;
+      }
+      
+      .item-price {
+        font-size: 1.2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .menu-title {
+        font-size: 1.8rem;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .menu-section {
+        font-size: 1.4rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .menu-subsection {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .item-price {
+        margin-left: 0.75rem;
+      }
+      
+      .menu-item {
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+      
+      .menu-item-subsection {
+        margin-left: 15px;
+      }
+    }
+    
+    @media (max-width: 375px) {
+      .menu-item {
+        flex-direction: column;
+      }
+      
+      .item-price {
+        margin-left: 0;
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="menu-title">Sean's Place</h1>
+    <h2 class="menu-section">Appetizers</h2><p class="section-description">Start your meal with our delicious appetizers</p><div class="subsection-container">
+          <h3 class="menu-subsection">Soups & Salads</h3>
+          <div class="menu-item menu-item-subsection">
+            <div class="item-details">
+              <h4 class="item-name">Caesar Salad</h4>
+              <p class="item-description">Crisp romaine lettuce, house-made croutons, parmesan cheese, and our signature Caesar dressing</p>
+              
+            </div>
+            <div class="item-price">$12.99</div>
+          </div><div class="menu-item menu-item-subsection">
+            <div class="item-details">
+              <h4 class="item-name">French Onion Soup</h4>
+              <p class="item-description">Rich beef broth with caramelized onions, topped with melted Gruyère cheese</p>
+              
+            </div>
+            <div class="item-price">$9.99</div>
+          </div></div><div class="subsection-container">
+          <h3 class="menu-subsection">Starters</h3>
+          <div class="menu-item menu-item-subsection">
+            <div class="item-details">
+              <h4 class="item-name">Crispy Calamari</h4>
+              <p class="item-description">Lightly breaded and fried, served with marinara sauce and lemon aioli</p>
+              
+            </div>
+            <div class="item-price">$14.99</div>
+          </div><div class="menu-item menu-item-subsection">
+            <div class="item-details">
+              <h4 class="item-name">Bruschetta</h4>
+              <p class="item-description">Toasted artisan bread topped with fresh tomatoes, basil, garlic, and balsamic glaze</p>
+              
+            </div>
+            <div class="item-price">$11.99</div>
+          </div></div><h2 class="menu-section">Main Courses</h2><p class="section-description">Our signature dishes made with the finest ingredients</p><div class="subsection-container">
+          <h3 class="menu-subsection">From the Grill</h3>
+          <div class="menu-item menu-item-subsection">
+            <div class="item-details">
+              <h4 class="item-name">Grilled Ribeye Steak</h4>
+              <p class="item-description">12oz USDA Prime ribeye, served with garlic mashed potatoes and seasonal vegetables</p>
+              
+            </div>
+            <div class="item-price">$42.99</div>
+          </div><div class="menu-item menu-item-subsection">
+            <div class="item-details">
+              <h4 class="item-name">Herb-Crusted Salmon</h4>
+              <p class="item-description">Fresh Atlantic salmon with herbs, served over quinoa with lemon butter sauce</p>
+              
+            </div>
+            <div class="item-price">$28.99</div>
+          </div></div><div class="subsection-container">
+          <h3 class="menu-subsection">Pasta & Risotto</h3>
+          <div class="menu-item menu-item-subsection">
+            <div class="item-details">
+              <h4 class="item-name">Fettuccine Alfredo</h4>
+              <p class="item-description">Fresh pasta tossed in our creamy parmesan sauce with your choice of chicken or shrimp</p>
+              
+            </div>
+            <div class="item-price">$22.99</div>
+          </div><div class="menu-item menu-item-subsection">
+            <div class="item-details">
+              <h4 class="item-name">Mushroom Risotto</h4>
+              <p class="item-description">Creamy arborio rice with mixed wild mushrooms, truffle oil, and parmesan</p>
+              
+            </div>
+            <div class="item-price">$24.99</div>
+          </div></div><h2 class="menu-section">Desserts</h2><p class="section-description">Sweet endings to complete your dining experience</p><div class="menu-item">
+          <div class="item-details">
+            <h4 class="item-name">New York Cheesecake</h4>
+            <p class="item-description">Classic cheesecake with graham cracker crust, served with berry compote</p>
+            
+          </div>
+          <div class="item-price">$8.99</div>
+        </div><div class="menu-item">
+          <div class="item-details">
+            <h4 class="item-name">Chocolate Lava Cake</h4>
+            <p class="item-description">Warm chocolate cake with molten center, served with vanilla ice cream</p>
+            
+          </div>
+          <div class="item-price">$9.99</div>
+        </div><div class="menu-item">
+          <div class="item-details">
+            <h4 class="item-name">Tiramisu</h4>
+            <p class="item-description">Traditional Italian dessert with espresso-soaked ladyfingers and mascarpone</p>
+            
+          </div>
+          <div class="item-price">$7.99</div>
+        </div><h2 class="menu-section">Beverages</h2><p class="section-description">Quench your thirst with our selection of drinks</p><div class="subsection-container">
+          <h3 class="menu-subsection">Non-Alcoholic</h3>
+          <div class="menu-item menu-item-subsection">
+            <div class="item-details">
+              <h4 class="item-name">Fresh Squeezed Orange Juice</h4>
+              <p class="item-description">Made to order with Florida oranges</p>
+              
+            </div>
+            <div class="item-price">$5.99</div>
+          </div><div class="menu-item menu-item-subsection">
+            <div class="item-details">
+              <h4 class="item-name">Iced Tea</h4>
+              <p class="item-description">Freshly brewed, served sweetened or unsweetened</p>
+              
+            </div>
+            <div class="item-price">$3.99</div>
+          </div><div class="menu-item menu-item-subsection">
+            <div class="item-details">
+              <h4 class="item-name">Soft Drinks</h4>
+              <p class="item-description">Coca-Cola, Sprite, Orange Fanta, Root Beer</p>
+              
+            </div>
+            <div class="item-price">$3.49</div>
+          </div></div>
+  </div>
+</body>
+</html>
